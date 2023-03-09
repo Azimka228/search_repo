@@ -25,13 +25,12 @@ const eye = "<svg aria-hidden=\"true\" height=\"16\" viewBox=\"0 0 16 16\" versi
 
 form_el?.addEventListener("submit", function (evt) {
 	evt.preventDefault();
-	fillArray();
+	debounce(getRepositories, 500)()
 });
 
 form_el.addEventListener("focusout", () => inputError.innerHTML = "");
 
 const createCard = (cardData: any) => {
-
 	let newDiv = document.createElement("div");
 	newDiv.classList.add("item");
 	newDiv.innerHTML += `<div><a href="${cardData.html_url}" target="_blank">${cardData.name}</a></div>`;
@@ -41,9 +40,20 @@ const createCard = (cardData: any) => {
 	return newDiv
 }
 
-function fillArray() {
+const debounce = (callback: () => void, wait: number) => {
+	let timeoutId: any = null;
+	// @ts-ignore
+	return (...args) => {
+		window.clearTimeout(timeoutId);
+		timeoutId = window.setTimeout(() => {
+			// @ts-ignore
+			return callback.apply(null, args);
+		}, wait);
+	};
+}
+
+function getRepositories() {
 	const countPerPage = 10
-	console.log(wordInput.value.length)
 	if (wordInput.value.length === 0) {
 		inputError.innerHTML = "Слишком мало симловов для поиска"
 		return
@@ -73,5 +83,8 @@ function fillArray() {
 			}
 		})
 	})
+		.then(err => {
+			console.log('ERROR',err)
+		})
 }
 

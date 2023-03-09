@@ -12,6 +12,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+    & > a {
+      word-break: break-word;
+      text-align: center;
+    }
   }
 
   & > div {
