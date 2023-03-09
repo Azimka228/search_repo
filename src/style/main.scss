@@ -2,12 +2,17 @@
   display: flex;
   flex-direction: column;
   max-width: 200px;
-  max-height: 200px;
   background: white;
   box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
   border-radius: 6px;
   padding: 10px;
   margin-top: 20px;
+  @media only screen and (min-width: 0px) and (max-width:  502px){
+    &{
+      min-width: 170px;
+      justify-self: center;
+    }
+  }
   & > div:first-child {
     display: flex;
     justify-content: center;
@@ -32,7 +37,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 1em;
-
+  @media only screen and (min-width: 502px) and (max-width:  730px){
+    &{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media only screen and (min-width: 0px) and (max-width:  502px){
+    &{
+      grid-template-columns: 1fr;
+    }
+  }
 }
 
 body {
