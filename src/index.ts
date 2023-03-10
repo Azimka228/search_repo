@@ -42,11 +42,9 @@ const createCard = (cardData: any) => {
 
 const debounce = (callback: () => void, wait: number) => {
 	let timeoutId: any = null;
-	// @ts-ignore
-	return (...args) => {
+	return (...args: any) => {
 		window.clearTimeout(timeoutId);
 		timeoutId = window.setTimeout(() => {
-			// @ts-ignore
 			return callback.apply(null, args);
 		}, wait);
 	};
@@ -83,8 +81,8 @@ function getRepositories() {
 			}
 		})
 	})
-		.then(err => {
-			console.log('ERROR',err)
+		.catch(err => {
+			console.log("ERROR", err)
 		})
 }
 
